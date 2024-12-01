@@ -1,0 +1,40 @@
+<!DOCTYPE qgis PUBLIC 'http://mrcc.com/qgis.dtd' 'SYSTEM'>
+<qgis version="3.36.1-Maidenhead">
+  <identifier>NA_States_Provinces_Albers</identifier>
+  <parentidentifier></parentidentifier>
+  <language>EN</language>
+  <type>dataset</type>
+  <title>NA_States_Provinces_Albers</title>
+  <abstract>NE_States_Provinces_Albers.shp represents state or province level political boundaries of North America aquired from Natural Earth (http://www.naturalearthdata.com) and projected in the Albers Conical Equal Area coordinate system for optimal appearance in map making. An Albers projection shows areas accurately, but distorts shapes. Countries distinguish between metropolitan (homeland) and independent and semi-independent portions of sovereign states. If you want to see the dependent overseas regions broken out (like in ISO codes, see France for example), use map units instead. Each country is coded with a world region that roughly follows the United Nations setup. Countries are coded with standard ISO and FIPS codes. French INSEE codes are also included. Includes some thematic data from the United Nations (1), U.S. Central Intelligence Agency, and elsewhere. Land polygons derived from 10m coastline. Continental polygons broken into smaller, contiguous pieces to avoid having too many points in any one polygon, facilitating faster data processing in certain software applications.
+
+Natural Earth was built through a collaboration of many volunteers and is supported by NACIS (North American Cartographic Information Society), and is free for use in any type of project. We provide these boundary files here at SevLTER as a convenience to our GIS user community.
+
+Natural Earth solves a problem: finding suitable data for making small-scale maps. In a time when the web is awash in geospatial data, cartographers are forced to waste time sifting through confusing tangles of poorly attributed data to make clean, legible maps. Because your time is valuable, Natural Earth data comes ready-to-use.</abstract>
+  <keywords vocabulary="gmd:topicCategory">
+    <keyword>North America</keyword>
+  </keywords>
+  <links>
+    <link size="" mimeType="" type="Local Area Network" description="" format="" url="file://\\VEGUITA\D$\GIS_GPS\a_sevlter_gdb_content_prep\Boundaries\NA_States_Provinces_Albers.shp" name="Shapefile"/>
+  </links>
+  <dates/>
+  <fees></fees>
+  <constraints type="Access">none</constraints>
+  <rights>none</rights>
+  <encoding></encoding>
+  <crs>
+    <spatialrefsys nativeFormat="Wkt">
+      <wkt>PROJCRS["North_America_Albers_Equal_Area_Conic",BASEGEOGCRS["NAD83",DATUM["North American Datum 1983",ELLIPSOID["GRS 1980",6378137,298.257222101,LENGTHUNIT["metre",1]]],PRIMEM["Greenwich",0,ANGLEUNIT["degree",0.0174532925199433]],ID["EPSG",4269]],CONVERSION["North_America_Albers_Equal_Area_Conic",METHOD["Albers Equal Area",ID["EPSG",9822]],PARAMETER["Latitude of false origin",40,ANGLEUNIT["degree",0.0174532925199433],ID["EPSG",8821]],PARAMETER["Longitude of false origin",-96,ANGLEUNIT["degree",0.0174532925199433],ID["EPSG",8822]],PARAMETER["Latitude of 1st standard parallel",20,ANGLEUNIT["degree",0.0174532925199433],ID["EPSG",8823]],PARAMETER["Latitude of 2nd standard parallel",60,ANGLEUNIT["degree",0.0174532925199433],ID["EPSG",8824]],PARAMETER["Easting at false origin",0,LENGTHUNIT["metre",1],ID["EPSG",8826]],PARAMETER["Northing at false origin",0,LENGTHUNIT["metre",1],ID["EPSG",8827]]],CS[Cartesian,2],AXIS["(E)",east,ORDER[1],LENGTHUNIT["metre",1]],AXIS["(N)",north,ORDER[2],LENGTHUNIT["metre",1]],USAGE[SCOPE["Not known."],AREA["North America - onshore and offshore: Canada - Alberta; British Columbia; Manitoba; New Brunswick; Newfoundland and Labrador; Northwest Territories; Nova Scotia; Nunavut; Ontario; Prince Edward Island; Quebec; Saskatchewan; Yukon. United States (USA) - Alabama; Alaska (mainland); Arizona; Arkansas; California; Colorado; Connecticut; Delaware; Florida; Georgia; Idaho; Illinois; Indiana; Iowa; Kansas; Kentucky; Louisiana; Maine; Maryland; Massachusetts; Michigan; Minnesota; Mississippi; Missouri; Montana; Nebraska; Nevada; New Hampshire; New Jersey; New Mexico; New York; North Carolina; North Dakota; Ohio; Oklahoma; Oregon; Pennsylvania; Rhode Island; South Carolina; South Dakota; Tennessee; Texas; Utah; Vermont; Virginia; Washington; West Virginia; Wisconsin; Wyoming."],BBOX[23.81,-172.54,86.46,-47.74]],ID["ESRI",102008]]</wkt>
+      <proj4>+proj=aea +lat_0=40 +lon_0=-96 +lat_1=20 +lat_2=60 +x_0=0 +y_0=0 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs</proj4>
+      <srsid>27131</srsid>
+      <srid>102008</srid>
+      <authid>ESRI:102008</authid>
+      <description>North_America_Albers_Equal_Area_Conic</description>
+      <projectionacronym>aea</projectionacronym>
+      <ellipsoidacronym>EPSG:7019</ellipsoidacronym>
+      <geographicflag>false</geographicflag>
+    </spatialrefsys>
+  </crs>
+  <extent>
+    <spatial minx="-4840686.77695699967443943" maxx="4013893.20633800001814961" maxz="0" crs="EPSG:4326" dimensions="2" minz="0" maxy="4518092.51371799968183041" miny="-3538791.07438299991190434"/>
+  </extent>
+</qgis>
