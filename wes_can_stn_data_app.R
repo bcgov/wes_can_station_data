@@ -35,11 +35,6 @@ library('plotly')
 
 library('lubridate')
 
-library('viridisLite')
-library('cptcity')
-library('RColorBrewer')
-library('colorspace')
-
 # Load and process input data -------
 ## Paths --
 # setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
@@ -120,7 +115,6 @@ ele_pal <- colorFactor(
   domain = stn_mtdt$ele_int
 )
 
-
 ## Stations data files  -----
 list.files(path = data_path,
            pattern = "*.csv",
@@ -169,9 +163,9 @@ ui <- fluidPage(
             HTML("<h4><b>Western Canada Stations Data app  </b> </h4>"),
             helpText(HTML(" The <i> wes_can_stn_data_app </i>   provides access to preliminary
                           quality-controlled daily climate data (minimum and maximum temperatures and precipitation)
-                          for 2,583 stations across Western Canada (BC, AB, NT and YK).
+                          for 2583 stations across Western Canada (BC, AB, NT and YK).
                           Sourced from Environment and Climate Change Canada (ECCC) and
-                          other agencies (BC-specific),  the app offers daily data that has
+                          other agencies (only BC),  the app offers daily data that has
                           at least 10 years of data availability. Users can explore, visualize,
                           and download station data streamlining data analysis and quality control processes.",)),
             width = 12,
@@ -208,7 +202,9 @@ ui <- fluidPage(
               <a href= 'mailto: Aseem.Sharma@gov.bc.ca'>Aseem.Sharma@gov.bc.ca</a> <br>
               <br>
               <h5><b>Code</b></h5>
-              <h5> The code and data of this app are available through GitHub at <a href='XXXXXX'> XXXX.</a></h5>"
+              <h5> The code and data of this app are available through GitHub at <a
+              href='https://github.com/bcgov/wes_can_station_data_app.git'>
+              https://github.com/bcgov/wes_can_station_data_app.git.</a></h5>"
             )
           ),
           column(width = 12,
@@ -435,10 +431,25 @@ server <- function(session, input, output) {
   stn_data_dtval <- reactive({
     req(input$loc_map_marker_click$id)
     stn <- input$loc_map_marker_click$id
-    # stn <- '1E08P'
-    # stn <- '27118'
+    # stn <- '10183'
+    # stn <- '37222'
     sel_stn_mtdt <- stns_dt_mtdt_fl[stns_dt_mtdt_fl$stn %in% stn,]
     sel_stn_dt <- read_csv(sel_stn_mtdt$dt_pth)
+
+    # If prcp all 0, change to NA and missing to 100%
+
+    zr_cnt_prcp <- sum(sel_stn_dt$prcp ==0, na.rm=T)
+    zr_cnt_tmin <- sum(sel_stn_dt$tmin ==0, na.rm=T)
+    zr_cnt_tmax <- sum(sel_stn_dt$tmax ==0, na.rm=T)
+    nrow(sel_stn_dt)
+
+    if(nrow(sel_stn_dt) == zr_cnt_prcp ){
+      sel_stn_dt$prcp <- NA
+    } else {
+      sel_stn_dt$prcp <- sel_stn_dt$prcp
+    }
+
+    # Change column headings to make all data consistent
 
     if ("stnid" %in% names(sel_stn_dt)) {
       names(sel_stn_dt)[names(sel_stn_dt) == "stnid"] <- "stn"
@@ -455,6 +466,18 @@ server <- function(session, input, output) {
     if ("per_na_prcp" %in% names(sel_stn_dt)) {
       names(sel_stn_dt)[names(sel_stn_dt) == "per_na_prcp"] <- "prcp_na_per"
     }
+
+    # Round missing percentage to whole number
+    if(nrow(sel_stn_dt) == zr_cnt_prcp ){
+      sel_stn_dt$prcp_na_per <- 100
+    } else {
+      sel_stn_dt$prcp_na_per <- sel_stn_dt$prcp_na_per
+    }
+
+    sel_stn_dt%<>%
+      mutate(prcp_na_per = round(prcp_na_per, digits=2),
+             tmin_na_per = round(tmin_na_per, digits=2),
+             tmax_na_per = round(tmax_na_per, digits=2))
 
     sel_stn_dt%<>%
       dplyr::select(stn,date,tmin,tmax,prcp,tmin_na_per, tmax_na_per, prcp_na_per)
@@ -674,11 +697,11 @@ server <- function(session, input, output) {
       ggsave(
         file,
         plot =  qc_controlled_dly_ts_plt(),
-        width = 12,
+        width = 15,
         height =9,
         units = "in",
         dpi = 305,
-        scale = 0.7,
+        scale = 0.8,
         limitsize = F,
         device = "png"
       )
